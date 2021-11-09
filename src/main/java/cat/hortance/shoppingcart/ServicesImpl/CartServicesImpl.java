@@ -40,7 +40,7 @@ public class CartServicesImpl {
                 .orElseThrow(()->new RuntimeException("Cart with id " + id + "not found"));
     }
 
-    public List<Item> getItems(Long cartId, Integer id){
+    public List<Item> getItem(Long cartId){
         Cart cart=getCart(cartId);
         return cart.getItems();
     }

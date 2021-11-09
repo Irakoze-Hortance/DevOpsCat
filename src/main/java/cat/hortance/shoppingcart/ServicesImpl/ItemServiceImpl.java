@@ -27,8 +27,8 @@ public class ItemServiceImpl {
         itemRepository.deleteById(id);
     }
 
-    public Item updateItem(Integer id, Item item){
-        itemRepository.findById(id)
+    public Item updateItem(Long id, Item item){
+        itemRepository.findById(Math.toIntExact(id))
                 .orElseThrow(()->new RuntimeException("Item now found with id " + id));
         item.setId(id);
         return itemRepository.save(item);

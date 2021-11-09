@@ -89,19 +89,20 @@ public class CartServiceTest {
     @Test
     public void retrieveCartItem(){
         Cart cart=new Cart(4500,"All that");
+        Item item=new Item("Watch","luxury");
         cart.setItems(new ArrayList<Item>(Arrays.asList(
                 new Item("watch","casual"),
                 new Item("Tie","Formal"))));
         when (cartRepository.findById(cart.getId())).thenReturn(Optional.of(cart));
         cartService.getItems(cart.getId(), item.getId());
-        assertEquals("Tie",cartService.getItems(cart.getId(), item.getId()).get(1).getName());
+        assertEquals("Tie",cartService.getItems(cart.getId(), item.getId()).getName());
     }
     @Test
     public void retrieveDetailsForItem(){
         Item item=new Item("Head phones","music");
         Cart cart=new Cart(3400,"Music");
         when(cartRepository.findById(cart.getId())).thenReturn(Optional.of(cart));
-        when(cartService.getItems(cart.getId(),item.getId())).thenReturn((List<Item>) item);
+        when(cartService.getItems(cart.getId(),item.getId())).thenReturn((Item) item);
 
         String expected="[name=Head phones,description=Music]";
         assertEquals(expected,cart.getItems());

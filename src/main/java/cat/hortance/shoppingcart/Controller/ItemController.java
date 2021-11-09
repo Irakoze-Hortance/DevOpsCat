@@ -25,6 +25,6 @@ public class ItemController {
 
     @PostMapping("/edit-item/{itemIid}")
     public Item editItem(@RequestBody Item item, @PathVariable Long itemId){
-        return itemService.updateItem(Math.toIntExact(itemId),item);
+        return itemService.updateItem(itemId,item);
     }
 }

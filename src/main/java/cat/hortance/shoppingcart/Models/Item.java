@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name="items")
 public class Item {
     @Id
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
 

@@ -29,37 +29,37 @@ public class ItemServicetest {
     @Test
     public  void returnItems(){
         when(itemRepository.findAll()).thenReturn(Arrays.asList(
-                new Item(1,"shoes","womenswear"),
-                new Item(2,"belt","menswear")));
+                new Item(1L,"shoes","womenswear"),
+                new Item(2L,"belt","menswear")));
         Assertions.assertEquals("belt",itemService.getItem(2).getName());
     }
 
     @Test
     public void deleteItem(){
-        Item ir=new Item(3,"shirt","all");
-        when(itemRepository.findById(ir.getId())).thenReturn(Optional.of(ir));
-        itemService.deleteItem(ir.getId());
-        verify(itemRepository).deleteById(ir.getId());
+        Item ir=new Item(3L,"shirt","all");
+        when(itemRepository.findById(Math.toIntExact(ir.getId()))).thenReturn(Optional.of(ir));
+        itemService.deleteItem(Math.toIntExact(ir.getId()));
+        verify(itemRepository).deleteById(Math.toIntExact(ir.getId()));
     }
 
     @Test
     public void updateItem(){
-        Item optItem=new Item(4,"Mask","health");
+        Item optItem=new Item(4L,"Mask","health");
         Item newItem= new Item("Medical","Outfit");
-        given(itemRepository.findById(optItem.getId())).willReturn(Optional.of(optItem));
+        given(itemRepository.findById(Math.toIntExact(optItem.getId()))).willReturn(Optional.of(optItem));
 
         itemService.updateItem(optItem.getId(),newItem);
         verify(itemRepository).save(newItem);
-        verify(itemRepository).findById(optItem.getId());
+        verify(itemRepository).findById(Math.toIntExact(optItem.getId()));
     }
     @Test
     public void returnItem(){
         Item item= new Item();
-        item.setId(2);
-        when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
-        Item expected=itemService.getItem(item.getId());
+        item.setId(2L);
+        when(itemRepository.findById(Math.toIntExact(item.getId()))).thenReturn(Optional.of(item));
+        Item expected=itemService.getItem(Math.toIntExact(item.getId()));
         assertThat(expected).isSameAs(item);
-        verify(itemRepository).findById(item.getId());
+        verify(itemRepository).findById(Math.toIntExact(item.getId()));
 
     }
 
